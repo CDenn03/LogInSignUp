@@ -1,16 +1,24 @@
 
-import React from "react";
-import { cn } from "@/lib/utils";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import Image from "next/image";
+
 
 function LoginForm({setIsSignUp}) {
+
+	const [email, setEmail]  = useState("");
+	const [password, setPassword]  = useState("");
+
+	const handleEmailChange = (e) => {
+		setEmail(e.target.value);
+	};
+
+	const handlePasswordChange = (e) => {
+		setPassword(e.target.value);
+	};
+    
     const handleSignUpClick = ()=>{
-        // console.log('runn')
-		// sessionStorage.setItem('isSignUp', JSON.stringify(true))
         setIsSignUp(true);
 	}
   return (
@@ -24,7 +32,7 @@ function LoginForm({setIsSignUp}) {
         </div>
         <div className="grid gap-3">
             <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" placeholder="m@example.com" className="bg-[#d3d1f93c]" required />
+            <Input id="email" value={email} onChange={handleEmailChange} type="email" placeholder="m@example.com" className="bg-[#d3d1f93c]" required />
         </div>
         <div className="grid gap-3">
             <div className="flex items-center">
@@ -33,7 +41,7 @@ function LoginForm({setIsSignUp}) {
                 Forgot your password?
             </a>
             </div>
-            <Input id="password" type="password" className="bg-[#d3d1f93c]" required />
+            <Input id="password" value={password} onChange={handlePasswordChange} type="password" className="bg-[#d3d1f93c]" required />
         </div>
         <Button type="submit" className="w-full bg-[#6C63FF] hover:bg-[#4944a2]">
             Login

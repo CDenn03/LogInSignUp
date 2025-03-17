@@ -1,20 +1,62 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 
 function SignUpForm({setIsSignUp}) {
+
+	const [username, setUsername]  = useState("");
+	const [email, setEmail]  = useState("");
+	const [password, setPassword]  = useState("");
+	const [confirmPassword, setConfirmPassword]  = useState("");
+	const [isMatch, setIsMatch] = useState(null);
+	
+
+	const handleUsernameChange = (e) => {
+		setUsername(e.target.value);
+	};
+
+	const handleEmailChange = (e) => {
+		setEmail(e.target.value);
+	};
+
+	const handlePasswordChange = (e) => {
+		setPassword(e.target.value);
+	};
+
+	const handleConfirmPasswordChange = (e) => {
+		setConfirmPassword(e.target.value);
+	};
+
 	const handleSignInClick = ()=>{
 		setIsSignUp(false);
-	}
+		
+	};
+
+	const handleCreateAccount = (e) => {
+		e.preventDefault();
+		console.log(username);
+		console.log(email);
+		console.log(password);
+		console.log(confirmPassword);
+	};
+	
+	useEffect(()=> {
+		if (password && confirmPassword) {
+			setIsMatch(password === confirmPassword);
+		  } else {
+			setIsMatch(null); 
+		  }
+	},[password, confirmPassword])
+
   return (
     <form className="p-6 md:p-8">
 			<div className="flex flex-col gap-6">
 					<div
-						className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:bordAddeasdadsadsaaer-t">
+						className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
 						<span className="bg-card text-muted-foreground relative z-10 px-2">
-								Or Sign Up  With
+							Or continue with
 						</span>
 					</div>
 					<div className="grid grid-cols-3 gap-4">
@@ -45,27 +87,24 @@ function SignUpForm({setIsSignUp}) {
 					</div>
 					<div className="flex flex-col items-center text-center">
 							<h1 className="text-2xl font-bold">Create Account</h1>
-							{/* <p className="text-muted-foreground text-balance">
-									Login to your Acme Inc account
-							</p> */}
 					</div>
 					<div className="grid gap-3">
-							<Label htmlFor="username">Email</Label>
-							<Input id="username" type="text" placeholder="Username" className="bg-[#d3d1f93c]" required />
+							<Label htmlFor="username">Username</Label>
+							<Input id="username" value={username} onChange={handleUsernameChange} type="text" placeholder="Username" className="bg-[#d3d1f93c]" required />
 					</div>
 					<div className="grid gap-3">
 							<Label htmlFor="email">Email</Label>
-							<Input id="email" type="email" placeholder="m@example.com" className="bg-[#d3d1f93c]" required />
+							<Input id="email" value={email} onChange={handleEmailChange} type="email" placeholder="m@example.com" className="bg-[#d3d1f93c]" required />
 					</div>
 					<div className="grid gap-3">
 							<Label htmlFor="password">Password</Label>
-							<Input id="password" type="password" placeholder="Password" className="bg-[#d3d1f93c]" required />
+							<Input id="password" value={password} onChange={handlePasswordChange} type="password" placeholder="Password" className="bg-[#d3d1f93c]" isMatch={isMatch} required />
 					</div>
 					<div className="grid gap-3">
 							<Label htmlFor="password"> Confirm Password</Label>
-							<Input id="password" type="password" placeholder="Confirm Password" className="bg-[#d3d1f93c]" required />
+							<Input id="password" value={confirmPassword} onChange={handleConfirmPasswordChange} type="password" placeholder="Confirm Password" className="bg-[#d3d1f93c]" isMatch={isMatch} required />
 					</div>
-					<Button type="submit" className="w-full bg-[#6C63FF] hover:bg-[#4944a2]">
+					<Button type="submit" onClick={handleCreateAccount} className="w-full bg-[#6C63FF] hover:bg-[#4944a2]">
 							Create Account
 					</Button>
 					<div className="text-center text-sm">
