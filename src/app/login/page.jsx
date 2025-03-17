@@ -10,30 +10,14 @@ import AuthImage from "@/components/auth/authImage";
 import LoginForm from "@/components/auth/LoginForm";
 import SignUpForm from "@/components/auth/SignUpForm";
 import { motion, AnimatePresence } from "framer-motion";
-
-export default function LoginPage({
-  className,
-  ...props
-}) {
-
+export default function LoginPage({ searchParams }) {
   const [isSignUp, setIsSignUp] = useState(false);
 
   return (
     <div className="bg-muted flex min-h-svh flex-col items-center justify-center p-6 md:p-10">
       <div className="w-full max-w-sm md:max-w-3xl">
-        <div className={cn("flex flex-col gap-6", className)} {...props}>
+        <div className="flex flex-col gap-6">
           <Card className="overflow-hidden p-0">
-
-            {/* {isSignUp? 
-            <CardContent className="grid p-0 md:grid-cols-2 transition-transform">
-              <SignUpForm setIsSignUp={setIsSignUp}  /> 
-              <AuthImage />
-            </CardContent> 
-                   :
-             <CardContent className="grid p-0 md:grid-cols-2 transition-transform">
-              <AuthImage />
-               <LoginForm setIsSignUp={setIsSignUp}  /> 
-            </CardContent>  }  */}
             <AnimatePresence mode="wait">
               {isSignUp ? (
                 <motion.div
@@ -61,9 +45,7 @@ export default function LoginPage({
                 </motion.div>
               )}
             </AnimatePresence>
-            
-             
-          </Card>    
+          </Card>
         </div>
       </div>
     </div>

@@ -19,12 +19,12 @@ function LoginForm({setIsSignUp}) {
         <div className="flex flex-col items-center text-center">
             <h1 className="text-2xl font-bold">Welcome back</h1>
             <p className="text-muted-foreground text-balance">
-            Login to your Acme Inc account
+            Login to your Account
             </p>
         </div>
         <div className="grid gap-3">
             <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" placeholder="m@example.com" className="bg-[#d3d1f97d]" required />
+            <Input id="email" type="email" placeholder="m@example.com" className="bg-[#d3d1f93c]" required />
         </div>
         <div className="grid gap-3">
             <div className="flex items-center">
@@ -33,7 +33,7 @@ function LoginForm({setIsSignUp}) {
                 Forgot your password?
             </a>
             </div>
-            <Input id="password" type="password" className="bg-[#d3d1f97d]" required />
+            <Input id="password" type="password" className="bg-[#d3d1f93c]" required />
         </div>
         <Button type="submit" className="w-full bg-[#6C63FF] hover:bg-[#4944a2]">
             Login

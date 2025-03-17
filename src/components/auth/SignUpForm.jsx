@@ -1,10 +1,8 @@
 import React from "react";
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import Image from "next/image";
+
 
 function SignUpForm({setIsSignUp}) {
 	const handleSignInClick = ()=>{
@@ -14,9 +12,9 @@ function SignUpForm({setIsSignUp}) {
     <form className="p-6 md:p-8">
 			<div className="flex flex-col gap-6">
 					<div
-						className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
+						className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:bordAddeasdadsadsaaer-t">
 						<span className="bg-card text-muted-foreground relative z-10 px-2">
-								Or continue with
+								Or Sign Up  With
 						</span>
 					</div>
 					<div className="grid grid-cols-3 gap-4">
@@ -46,29 +44,29 @@ function SignUpForm({setIsSignUp}) {
 						</Button>
 					</div>
 					<div className="flex flex-col items-center text-center">
-							<h1 className="text-2xl font-bold">Create An Account</h1>
+							<h1 className="text-2xl font-bold">Create Account</h1>
 							{/* <p className="text-muted-foreground text-balance">
 									Login to your Acme Inc account
 							</p> */}
 					</div>
 					<div className="grid gap-3">
 							<Label htmlFor="username">Email</Label>
-							<Input id="username" type="text" placeholder="Username" className="bg-[#d3d1f97d]" required />
+							<Input id="username" type="text" placeholder="Username" className="bg-[#d3d1f93c]" required />
 					</div>
 					<div className="grid gap-3">
 							<Label htmlFor="email">Email</Label>
-							<Input id="email" type="email" placeholder="m@example.com" className="bg-[#d3d1f97d]" required />
+							<Input id="email" type="email" placeholder="m@example.com" className="bg-[#d3d1f93c]" required />
 					</div>
 					<div className="grid gap-3">
 							<Label htmlFor="password">Password</Label>
-							<Input id="password" type="password" className="bg-[#d3d1f97d]" required />
+							<Input id="password" type="password" placeholder="Password" className="bg-[#d3d1f93c]" required />
 					</div>
 					<div className="grid gap-3">
 							<Label htmlFor="password"> Confirm Password</Label>
-							<Input id="password" type="password" className="bg-[#d3d1f97d]" required />
+							<Input id="password" type="password" placeholder="Confirm Password" className="bg-[#d3d1f93c]" required />
 					</div>
 					<Button type="submit" className="w-full bg-[#6C63FF] hover:bg-[#4944a2]">
-							Login
+							Create Account
 					</Button>
 					<div className="text-center text-sm">
 							Have an account?{" "}
