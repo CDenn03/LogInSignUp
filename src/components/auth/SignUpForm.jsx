@@ -59,7 +59,7 @@ function SignUpForm({setIsSignUp}) {
 		setError(null);
 	
 		const timeout = setTimeout(() => {
-			setIsLoading(false); // Fallback to prevent infinite loading
+			setIsLoading(false); 
 			setError("Request timed out. Please try again.");
 		}, 10000); // 10-second timeout
 	
@@ -71,7 +71,6 @@ function SignUpForm({setIsSignUp}) {
 	
 			const result = await signup(formData);
 			console.log("Signup result:", result); // Log the result
-	
 			if (result.error) {
 				setError(result.error);
 			} else {
@@ -84,6 +83,7 @@ function SignUpForm({setIsSignUp}) {
 			}
 		} catch (error) {
 			console.error("Error during signup:", error);
+	
 			setError("An error occurred while creating the account.");
 		} finally {
 			setIsLoading(false);

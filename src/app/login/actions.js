@@ -3,6 +3,7 @@
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { createClient } from '../../../utils/supabase/server';
+import { message } from "antd";
 
 export async function login(formData) {
   const supabase = await createClient();
@@ -18,8 +19,9 @@ export async function login(formData) {
     return { error: error.message }; // Return the error to the frontend
   }
 
-  revalidatePath('/', 'layout');
-  redirect('/');
+  // message.success("Login Successful");
+  // revalidatePath('/', 'layout');
+  // redirect('/');
 
 }
 

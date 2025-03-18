@@ -9,10 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ant-design/v5-patch-for-react-19": "^1.0.3",
     "@radix-ui/react-label": "^2.1.2",
     "@radix-ui/react-slot": "^1.1.2",
     "@supabase/ssr": "^0.6.1",
     "@supabase/supabase-js": "^2.49.1",
+    "antd": "^5.24.4",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.5.0",

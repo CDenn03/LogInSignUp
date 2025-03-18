@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { login } from "@/app/login/actions";
 import { useRouter } from 'next/navigation';
+import { message } from "antd";
 
 
 function LoginForm({setIsSignUp}) {
@@ -35,17 +36,19 @@ function LoginForm({setIsSignUp}) {
           formData.append("email", email);
           formData.append("password", password);
       
-          const result = await login(formData);
-          
-          console.log("Login result:", result); // Log the result
+          //const result =
+         await login(formData);
+          console.log('test')
+        //   console.log("Login result:", result); 
       
-          if (result.error) {
-            setError(result.error); // Display the error message
-          } else {
-            console.log("Login successful!");
+        //   if (result.error) {
+        //     setError(result.error); // Display the error message
+        //   } else {
+            message.success("Login Successful");
+            console.log('test 2')
             router.push('/');
             // Optionally, you can redirect the user here or show a success message
-          }
+         // }
         } catch (error) {
           console.error("Error during login:", error);
           setError("An error occurred while logging in.");
