@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { signup } from "@/app/login/actions";
+import { useRouter } from 'next/navigation';
 
 
 function SignUpForm({setIsSignUp}) {
@@ -11,6 +13,10 @@ function SignUpForm({setIsSignUp}) {
 	const [password, setPassword]  = useState("");
 	const [confirmPassword, setConfirmPassword]  = useState("");
 	const [isMatch, setIsMatch] = useState(null);
+	const [isLoading, setIsLoading] = useState(false);
+	const [error, setError] = useState(null);
+
+	const router = useRouter();
 	
 
 	const handleUsernameChange = (e) => {
@@ -34,20 +40,59 @@ function SignUpForm({setIsSignUp}) {
 		
 	};
 
-	const handleCreateAccount = (e) => {
+	const checkPasswordMatch = () => {
+		if (password && confirmPassword) {
+			setIsMatch(password === confirmPassword);
+			return password === confirmPassword;
+		} 
+	};
+
+	const handleCreateAccount = async (e) => {
 		e.preventDefault();
-		console.log(username);
-		console.log(email);
-		console.log(password);
-		console.log(confirmPassword);
+	
+		if (!checkPasswordMatch()) {
+			setError("Passwords do not match.");
+			return;
+		}
+	
+		setIsLoading(true);
+		setError(null);
+	
+		const timeout = setTimeout(() => {
+			setIsLoading(false); // Fallback to prevent infinite loading
+			setError("Request timed out. Please try again.");
+		}, 10000); // 10-second timeout
+	
+		try {
+			const formData = new FormData();
+			formData.append("username", username);
+			formData.append("email", email);
+			formData.append("password", password);
+	
+			const result = await signup(formData);
+			console.log("Signup result:", result); // Log the result
+	
+			if (result.error) {
+				setError(result.error);
+			} else {
+				console.log("Account created successfully!");
+				setIsLoading(false);
+				clearTimeout(timeout);
+
+				router.push('/login');
+				// Optionally, you can redirect the user here or show a success message
+			}
+		} catch (error) {
+			console.error("Error during signup:", error);
+			setError("An error occurred while creating the account.");
+		} finally {
+			setIsLoading(false);
+			clearTimeout(timeout);
+		}
 	};
 	
 	useEffect(()=> {
-		if (password && confirmPassword) {
-			setIsMatch(password === confirmPassword);
-		  } else {
-			setIsMatch(null); 
-		  }
+		checkPasswordMatch();
 	},[password, confirmPassword])
 
   return (
@@ -104,8 +149,8 @@ function SignUpForm({setIsSignUp}) {
 							<Label htmlFor="password"> Confirm Password</Label>
 							<Input id="password" value={confirmPassword} onChange={handleConfirmPasswordChange} type="password" placeholder="Confirm Password" className="bg-[#d3d1f93c]" isMatch={isMatch} required />
 					</div>
-					<Button type="submit" onClick={handleCreateAccount} className="w-full bg-[#6C63FF] hover:bg-[#4944a2]">
-							Create Account
+					<Button type="submit" onClick={handleCreateAccount} className="w-full bg-[#6C63FF] hover:bg-[#4944a2]" disabled={isLoading}>
+							{isLoading? "Creating Account..." : "Create Account"}
 					</Button>
 					<div className="text-center text-sm">
 							Have an account?{" "}
